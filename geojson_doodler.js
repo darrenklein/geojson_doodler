@@ -22,13 +22,27 @@ var drawControl = new L.Control.Draw({
 
 
 
+
+function addPropertyFields(x){
+    $(x).next(".properties_container").find(".header_row").show();
+    $(x).next(".properties_container").append("<tr class='properties_row'><td><input type='text' class='property' /></td><td><input type='text' class='value' /></td><td><button class='remove'>Remove</button></td></tr>");
+};
+
+function removePropertyFields(x){
+    $(x).parent().parent().remove();
+};
+
+
+
 var popupFields = "Properties</br><button class='add_property'>Add property</button><table class='properties_container'><tr class='header_row' style='display:none'><th>Property</th><th>Value</th></tr></table><button class='popup_save'>Save</button>";
 
 
-
 $(document).on("click", ".add_property", function(){
-    $(this).next(".properties_container").find(".header_row").show();
-    $(this).next(".properties_container").append("<tr class='properties_row'><td><input type='text' class='property' /></td><td><input type='text' class='value' /></td></tr>");
+    addPropertyFields(this);
+});
+
+$(document).on("click", ".remove", function(){
+    removePropertyFields(this);
 });
 
 
@@ -81,7 +95,7 @@ map.on('draw:created', function(e){
             popupFieldsEdit = "Properties</br><button class='add_property'>Add property</button><table class='properties_container'><tr class='header_row'><th>Property</th><th>Value</th></tr>";
             
             $.each(e.layer.properties, function(attribute, value){
-                popupFieldsEdit += "<tr class='properties_row'><td><input type='text' class='property' value='"+attribute+"' /></td><td><input type='text' class='value' value='"+value+"' /></td></tr>";
+                popupFieldsEdit += "<tr class='properties_row'><td><input type='text' class='property' value='"+attribute+"' /></td><td><input type='text' class='value' value='"+value+"' /></td><td><button class='remove'>Remove</button></td></tr>";
             });
             
             popupFieldsEdit += "</table><button class='popup_save'>Save</button>";
@@ -182,8 +196,8 @@ function exportTableToCSV($table, filename){
     $(this)
         .attr({
         'download': filename,
-            'href': csvData,
-            'target': '_blank'
+        'href': csvData,
+        'target': '_blank'
     });
 };
     
