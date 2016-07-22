@@ -19,7 +19,7 @@
     
     <div id="instructions">
         <ul>
-            <li>Use the tools on the left of the map to draw points, lines, polygons, or circles</li>
+            <li>Use the tools on the left of the map to draw points, lines, or polygons</li>
             <li>Create as many as you like!</li>
             <li>Add properties and values for each geometry in its popup window - be sure to save the changes in each popup</li>
             <li>Click 'Export' to download a .csv of your GeoJSONs! (export not available in Internet Explorer - please use Chrome, Safari, or Firefox)</li>
@@ -28,15 +28,16 @@
     
     <div id="map"></div>
     
-    <div>
-        <a id='export'>Export</a>
+    <div id="export_link_container">
+        <a id="export">Export</a>
     </div>
     
     <div id="export_table_container"></div>
     
-    <div id="credit">Created by Darren Klein, 2016 - <a href="http://darrenklein.github.io/">darrenklein.github.io</a></div>
-    <div id="githud"><a href="https://github.com/darrenklein/geojson_doodler">github.com/darrenklein/geojson_doodler</a></div>
-
+    <div id="footer">
+        <div id="credit">Created by Darren Klein, 2016 - <a href="http://darrenklein.github.io/">darrenklein.github.io</a></div>
+        <div id="githud"><a href="https://github.com/darrenklein/geojson_doodler">github.com/darrenklein/geojson_doodler</a></div>
+    </div>
 
     <script src="scripts/leaflet.js"></script>
     <script src="scripts/leaflet.draw.js"></script>    

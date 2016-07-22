@@ -26,18 +26,33 @@ form{
 }
 
 #export{
-    width: 100%;
+    display: block;
+    margin: auto;
+    width: 12%;
+    text-align: center;
     background-color: #11CDFF;
-    border: 0;
-    font-size: 20px;
-    letter-spacing: 2px;
+    color: #FFFFFF;
+    font-size: 25px;
+    letter-spacing: 4px;
     cursor: pointer;
+    padding: 10px 0px 10px 0px;
 }
 
 #export:hover{
     background-color: #12A9FF;
 }
 
+
+.leaflet-clickable{
+    stroke: #FFF600;
+    stroke-width: 4;
+    stroke-opacity:0.7;
+}
+
 .leaflet-popup-content-wrapper{
     width: 380px;
+}
+
+#footer{
+    margin-top: 30px;
 }
