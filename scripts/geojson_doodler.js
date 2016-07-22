@@ -12,9 +12,7 @@ L.tileLayer('https://{s}.tiles.mapbox.com/v3/ebrelsford.ho06j5h0/{z}/{x}/{y}.png
 var featureGroup = L.featureGroup().addTo(map);
 
 var drawControl = new L.Control.Draw({
-    draw: {
-        circle: false
-    },
+
     edit: {
         featureGroup: featureGroup
     }
@@ -133,7 +131,6 @@ function save(){
     geoJSONArray = [];
     
     if(Object.keys(featureGroup._layers).length == 0){
-        alert("You haven't added anything to the map.");
         return false;
     }
     else{

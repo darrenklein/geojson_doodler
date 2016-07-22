@@ -5,11 +5,11 @@
 
     <title>GeoJSON Doodler</title>
     
-    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+    <script src="scripts/jquery-2.1.0.min.js"></script>
     
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
-    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.3/leaflet.draw.css' rel='stylesheet' />
-    <link rel="stylesheet" href="stylesheet.css" />
+    <link rel="stylesheet" href="stylesheets/leaflet.css" />
+    <link rel="stylesheet" href="stylesheets/leaflet.draw.css" />
+    <link rel="stylesheet" href="stylesheets/geojson_doodler.css" />
     
 </head>
 
@@ -19,42 +19,49 @@
     
     <div id="instructions">
         <ul>
-            <li>Use the tools on the left of the map to draw points, lines, or polygons</li>
+            <li>Use the tools on the left of the map to draw points, lines, polygons, or circles</li>
             <li>Create as many as you like!</li>
-            <li>Add properties and values</li>
-            <li>Click 'Export' to download a .csv of your GeoJSONs!</li>
+            <li>Add properties and values for each geometry in its popup window - be sure to save the changes in each popup</li>
+            <li>Click 'Export' to download a .csv of your GeoJSONs! (export not available in Internet Explorer - please use Chrome, Safari, or Firefox)</li>
         </ul>
     </div>
     
     <div id="map"></div>
     
     <div>
-        <a href='#' id='export'>Export</a>
+        <a id='export'>Export</a>
     </div>
     
     <div id="export_table_container"></div>
+    
+    <div id="credit">Created by Darren Klein, 2016 - <a href="http://darrenklein.github.io/">darrenklein.github.io</a></div>
+    <div id="githud"><a href="https://github.com/darrenklein/geojson_doodler">github.com/darrenklein/geojson_doodler</a></div>
 
 
-    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
-    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.3/leaflet.draw.js'></script>    
-    <script src="geojson_doodler.js"></script>
+    <script src="scripts/leaflet.js"></script>
+    <script src="scripts/leaflet.draw.js"></script>    
+    <script src="scripts/geojson_doodler.js"></script>
     
     <script>
         $("#export").on('click', function(event){
-            
+
             save();
-    
-            $('#export_table_container').empty();
-            $('#export_table_container').append('<table id="export_table" style="display:none"></table>');
+            
+            if(save()){
+                $('#export_table_container').empty();
+                $('#export_table_container').append('<table id="export_table" style="display:none"></table>');
 
+                $.each(geoJSONArray, function(key, value){
+                    $("#export_table").append("<tr><td>"+value+"</td></tr>");
+                });
 
-            $.each(geoJSONArray, function(key, value){
-                $("#export_table").append("<tr><td>"+value+"</td></tr>");
-            });
+                timestamp = Math.floor(Date.now()/1000);
 
-            timestamp = Math.floor(Date.now()/1000);
-
-            exportTableToCSV.apply(this, [$('#export_table'), 'GeoJSON_' + timestamp + '.csv']);
+                exportTableToCSV.apply(this, [$('#export_table'), 'GeoJSON_' + timestamp + '.csv']);
+            }
+            else{
+                alert("You haven't added anything to the map.");  
+            };
         });
     </script>
     

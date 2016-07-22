@@ -25,7 +25,7 @@ form{
     margin: auto;
 }
 
-#submit{
+#export{
     width: 100%;
     background-color: #11CDFF;
     border: 0;
@@ -34,6 +34,10 @@ form{
     cursor: pointer;
 }
 
-#submit:hover{
+#export:hover{
     background-color: #12A9FF;
+}
+
+.leaflet-popup-content-wrapper{
+    width: 380px;
 }
