@@ -112,7 +112,7 @@ map.on('draw:created', function(e){
 function save(){    
 
     geoJSONArray = [];
-    
+    layerNameArray = [];
     layerArray = [];
     
     if(Object.keys(featureGroup._layers).length == 0){
@@ -126,18 +126,45 @@ function save(){
             //GETS THE layerName PROPERTY
             layerName = geoObject.properties.layer_name;
             
-            //IF layerName IS NOT YET IN layerArray, PUSH IT IN
-            if($.inArray(layerName, layerArray) == -1){
-                layerArray.push(layerName);
+            //IF layerName IS NOT YET IN layerNameArray, PUSH IT IN
+            if($.inArray(layerName, layerNameArray) == -1){
+                layerNameArray.push(layerName);
             };
-            
-            
             
             geoObjectString = JSON.stringify(geoObject);
             geoJSONArray.push(geoObjectString);
-         });   
+         });
+        
+        
+        
+        //this['Layer_' + key];
+        
+        $.each(layerNameArray, function(key, name){
+            
+            this['Layer_' + key] = new Object();
+            this['Layer_' + key].name = name;
+            this['Layer_' + key].type = "FeatureCollection";
+            
+            featuresArray = [];
+        
+            $.each(geoJSONArray, function(key, value){
+                geoJSON = JSON.parse(value);
+                if(geoJSON.properties.layer_name == name){
+                    featuresArray.push(JSON.stringify(geoJSON));
+                };
+            });
+            
+            this['Layer_' + key].features = featuresArray;
+            
+            console.log(this['Layer_' + key]);
+            
+        });
+        
+        
+        
+        
     };
-    console.log(layerArray);
+
     return geoJSONArray;
 };
 
