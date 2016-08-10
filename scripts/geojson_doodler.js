@@ -119,6 +119,7 @@ function save(){
         return false;
     }
     else{
+        //GET THE LAYER NAMES OUT OF EACH OBJECT AND PUT LAYER NAMES AND OBJECTS INTO SEPARATE ARRAYS
         $.each(featureGroup._layers, function(key, value){
             geoObject = value.toGeoJSON();
             geoObject.properties = value.properties;
@@ -136,9 +137,7 @@ function save(){
          });
         
         
-        
-        //this['Layer_' + key];
-        
+        //COMPARING THE ARRAYS OF GEOJSONS AND NAMES
         $.each(layerNameArray, function(key, name){
             
             this['Layer_' + key] = new Object();
@@ -156,16 +155,19 @@ function save(){
             
             this['Layer_' + key].features = featuresArray;
             
-            console.log(this['Layer_' + key]);
+            layerString = JSON.stringify(this['Layer_' + key])
+            layerArray.push(layerString);
             
         });
+        
+        console.log(layerArray);
         
         
         
         
     };
 
-    return geoJSONArray;
+    return layerArray;
 };
 
 

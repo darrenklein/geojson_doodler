@@ -48,21 +48,21 @@
 
             save();
             
-//            if(save()){
-//                $('#export_table_container').empty();
-//                $('#export_table_container').append('<table id="export_table" style="display:none"></table>');
-//
-//                $.each(geoJSONArray, function(key, value){
-//                    $("#export_table").append("<tr><td>"+value+"</td></tr>");
-//                });
-//
-//                timestamp = Math.floor(Date.now()/1000);
-//
-//                exportTableToCSV.apply(this, [$('#export_table'), 'GeoJSON_' + timestamp + '.csv']);
-//            }
-//            else{
-//                alert("You haven't added anything to the map.");  
-//            };
+            if(save()){
+                $('#export_table_container').empty();
+                $('#export_table_container').append('<table id="export_table" style="display:none"></table>');
+
+                $.each(layerArray, function(key, value){
+                    $("#export_table").append("<tr><td>"+value+"</td></tr>");
+                });
+
+                timestamp = Math.floor(Date.now()/1000);
+
+                exportTableToCSV.apply(this, [$('#export_table'), 'GeoJSON_' + timestamp + '.csv']);
+            }
+            else{
+                alert("You haven't added anything to the map.");  
+            };
         });
     </script>
     
@@ -73,3 +73,11 @@
 </html>
 
 <!--Handmade by Darren Klein, 2016 - http://darrenklein.github.io/-->
+
+
+<!--
+bad
+{"name":"borough","type":"FeatureCollection","features":[{"type":"Feature","properties":{"layer_name":"borough","name":"staten island"},"geometry":{"type":"Point","coordinates":[-74.16292905807495,40.57641252104445]}}","{"type":"Features","properties":{"layer_name":"borough","name":"manhattan"},"geometry":{"type":"Point","coordinates":[-73.97478818893433,40.76806170936614]}}]}
+good
+{"name":"mile_pts","type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[-75.945788669,41.3459514200002,0]},"properties":{"OBJECTID":1,"Name":"0"}}]}
+-->
