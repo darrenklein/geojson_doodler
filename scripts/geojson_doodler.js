@@ -149,7 +149,8 @@ function save(){
             $.each(geoJSONArray, function(key, value){
                 geoJSON = JSON.parse(value);
                 if(geoJSON.properties.layer_name == name){
-                    featuresArray.push(JSON.stringify(geoJSON));
+                    //featuresArray.push(JSON.stringify(geoJSON));
+                    featuresArray.push(geoJSON);
                 };
             });
             
