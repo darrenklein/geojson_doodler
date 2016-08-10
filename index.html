@@ -48,21 +48,21 @@
 
             save();
             
-            if(save()){
-                $('#export_table_container').empty();
-                $('#export_table_container').append('<table id="export_table" style="display:none"></table>');
-
-                $.each(geoJSONArray, function(key, value){
-                    $("#export_table").append("<tr><td>"+value+"</td></tr>");
-                });
-
-                timestamp = Math.floor(Date.now()/1000);
-
-                exportTableToCSV.apply(this, [$('#export_table'), 'GeoJSON_' + timestamp + '.csv']);
-            }
-            else{
-                alert("You haven't added anything to the map.");  
-            };
+//            if(save()){
+//                $('#export_table_container').empty();
+//                $('#export_table_container').append('<table id="export_table" style="display:none"></table>');
+//
+//                $.each(geoJSONArray, function(key, value){
+//                    $("#export_table").append("<tr><td>"+value+"</td></tr>");
+//                });
+//
+//                timestamp = Math.floor(Date.now()/1000);
+//
+//                exportTableToCSV.apply(this, [$('#export_table'), 'GeoJSON_' + timestamp + '.csv']);
+//            }
+//            else{
+//                alert("You haven't added anything to the map.");  
+//            };
         });
     </script>
     

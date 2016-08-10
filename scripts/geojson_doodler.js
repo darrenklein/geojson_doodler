@@ -30,7 +30,7 @@ function removePropertyFields(x){
 
 
 
-var popupFields = "Properties</br><button class='add_property'>Add property</button><table class='properties_container'></table><button class='popup_save'>Save properties</button>";
+var popupFields = "Properties</br><button class='add_property'>Add property</button><table class='properties_container'><tr class='properties_row'><td><input type='text' class='property' value='layer_name' readonly /></td><td><input type='text' class='value' placeholder='Enter layer name (required)' /></td></tr></table><button class='popup_save'>Save properties</button>";
 
 
 $(document).on("click", ".add_property", function(){
@@ -113,6 +113,8 @@ function save(){
 
     geoJSONArray = [];
     
+    layerArray = [];
+    
     if(Object.keys(featureGroup._layers).length == 0){
         return false;
     }
@@ -120,12 +122,22 @@ function save(){
         $.each(featureGroup._layers, function(key, value){
             geoObject = value.toGeoJSON();
             geoObject.properties = value.properties;
-            type = geoObject.geometry.type;
+
+            //GETS THE layerName PROPERTY
+            layerName = geoObject.properties.layer_name;
+            
+            //IF layerName IS NOT YET IN layerArray, PUSH IT IN
+            if($.inArray(layerName, layerArray) == -1){
+                layerArray.push(layerName);
+            };
+            
+            
+            
             geoObjectString = JSON.stringify(geoObject);
             geoJSONArray.push(geoObjectString);
-         });
+         });   
     };
-    
+    console.log(layerArray);
     return geoJSONArray;
 };
 
