@@ -19,7 +19,6 @@ var drawControl = new L.Control.Draw({
 
 
 
-
 function addPropertyFields(x){
     $(x).next(".properties_container").append("<tr class='properties_row'><td><input type='text' class='property' placeholder='Property' /></td><td><input type='text' class='value' placeholder='Value' /></td><td><button class='remove'>Remove</button></td></tr>");
 };
@@ -43,12 +42,9 @@ $(document).on("click", ".remove", function(){
 
 
 
-
-
 map.on('draw:created', function(e){
     featureGroup.addLayer(e.layer);
     e.layer.bindPopup(popupFields).openPopup();
-    
     
     
     function popupSave(x){
@@ -69,8 +65,6 @@ map.on('draw:created', function(e){
         return propertiesObject;
     };
     
-    
-    
 
     $('.popup_save').click(function(){
         popupSave(this);
@@ -78,9 +72,6 @@ map.on('draw:created', function(e){
     });
     
     
-    
-    
-
     e.layer.on('click', function(){
         if(e.layer.properties){
             popupFieldsEdit = "Properties</br><button class='add_property'>Add property</button><table class='properties_container'>";
@@ -107,16 +98,13 @@ map.on('draw:created', function(e){
 
 
 
-
-
-function save(){    
+function save(){
 
     geoJSONArray = [];
     layerNameArray = [];
     layerArray = [];
     
     if(Object.keys(featureGroup._layers).length == 0){
-        errorCode = 0;
         return false;
     }
     else{
@@ -176,9 +164,6 @@ function save(){
 };
 
 
-
-
-
 function exportTableToCSV($table, filename){
 
     var $rows = $table.find('tr:has(td)'),
@@ -212,12 +197,17 @@ function exportTableToCSV($table, filename){
         // Data URI
         csvData = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv);
 
-
-
     $(this)
         .attr({
         'download': filename,
         'href': csvData,
         'target': '_blank'
+    });
+};
+
+
+function clearMap(){
+    $.each(featureGroup._layers, function(){
+        featureGroup.removeLayer(this)
     });
 };

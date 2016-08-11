@@ -42,6 +42,27 @@ form{
     background-color: #12A9FF;
 }
 
+#clear{
+    display: block;
+    margin: auto;
+    border: 0;
+    width: 9%;
+    text-align: center;
+    background-color: #FF530D;
+    color: #FFFFFF;
+    font-size: 100%;
+    letter-spacing: 4px;
+    cursor: pointer;
+    padding: 10px 0px 10px 0px;
+}
+
+#clear:hover{
+    background-color: #E82C0C;
+}
+
+.function_container{
+    margin: 7px 0px 7px 0px;
+}
 
 .leaflet-clickable{
     stroke: #FFF600;
