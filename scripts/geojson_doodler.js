@@ -116,6 +116,7 @@ function save(){
     layerArray = [];
     
     if(Object.keys(featureGroup._layers).length == 0){
+        errorCode = 0;
         return false;
     }
     else{
@@ -123,7 +124,7 @@ function save(){
         $.each(featureGroup._layers, function(key, value){
             geoObject = value.toGeoJSON();
             geoObject.properties = value.properties;
-
+            
             //GETS THE layerName PROPERTY
             layerName = geoObject.properties.layer_name;
             
@@ -131,7 +132,7 @@ function save(){
             if($.inArray(layerName, layerNameArray) == -1){
                 layerNameArray.push(layerName);
             };
-            
+
             geoObjectString = JSON.stringify(geoObject);
             geoJSONArray.push(geoObjectString);
          });
@@ -140,19 +141,23 @@ function save(){
         //COMPARING THE ARRAYS OF GEOJSONS AND NAMES
         $.each(layerNameArray, function(key, name){
             
+            //KEY ATTRIBUTES OF A FEATURECOLLECTION
             this['Layer_' + key] = new Object();
             this['Layer_' + key].name = name;
             this['Layer_' + key].type = "FeatureCollection";
             
+            //THIS ARRAY HOLDS THE ORIGINAL GEOJSONS, WHICH WILL NOW BE FEATURES IN THE FEATURECOLLECTION/LAYER
             featuresArray = [];
         
             $.each(geoJSONArray, function(key, value){
                 geoJSON = JSON.parse(value);
+                //IF THE GEOJSON layer_name MATCHES THE NAME, PUSH IT 
                 if(geoJSON.properties.layer_name == name){
                     featuresArray.push(geoJSON);
                 };
             });
             
+            //THE FEATURES ATTRIBUTE OF THE LAYER OBJECT IS THE CONTENT OF featuresArray
             this['Layer_' + key].features = featuresArray;
             
             layerString = JSON.stringify(this['Layer_' + key])

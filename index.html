@@ -44,9 +44,9 @@
     <script src="scripts/geojson_doodler.js"></script>
     
     <script>
+        var errorCode;
+        
         $("#export").on('click', function(event){
-
-            save();
             
             if(save()){
                 $('#export_table_container').empty();
@@ -60,9 +60,12 @@
 
                 exportTableToCSV.apply(this, [$('#export_table'), 'GeoJSON_' + timestamp + '.csv']);
             }
-            else{
+            else if(errorCode === 0){
                 alert("You haven't added anything to the map.");  
-            };
+            }
+            else if(errorCode === 1){
+                alert("chunk");
+            }
         });
     </script>
     
