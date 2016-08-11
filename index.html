@@ -19,10 +19,9 @@
     
     <div id="instructions">
         <ul>
-            <li>Use the tools on the left of the map to draw points, lines, or polygons</li>
-            <li>Create as many as you like!</li>
-            <li>Add properties and values for each geometry in its popup window - be sure to save the changes in each popup</li>
-            <li>Click 'Export' to download a .csv of your GeoJSONs! (export not available in Internet Explorer - please use Chrome, Safari, or Firefox)</li>
+            <li>Use the tools on the left of the map to draw points, lines, or polygons, then assign them attributes in their pop-up windows.</li>
+            <li>Geometries with the same <strong><i>layer_name</i></strong> attribute will be bundled together into a FeatureCollection on export.</li>
+            <li>Click 'Export' to download a .csv of your GeoJSONs! (export not available in Internet Explorer - please use a cool browser like Chrome, Safari, or Firefox)</li>
         </ul>
     </div>
     
@@ -44,28 +43,30 @@
     <script src="scripts/geojson_doodler.js"></script>
     
     <script>
-        var errorCode;
-        
         $("#export").on('click', function(event){
             
+            errorCode = null;
+            
             if(save()){
-                $('#export_table_container').empty();
-                $('#export_table_container').append('<table id="export_table" style="display:none"></table>');
+                if(errorCode === 1){
+                    alert("The layer name has not been set for one of your objects - please make sure to set and save the layer_name attribute for each of your geometries.");
+                }
+                else{
+                    $('#export_table_container').empty();
+                    $('#export_table_container').append('<table id="export_table" style="display:none"></table>');
 
-                $.each(layerArray, function(key, value){
-                    $("#export_table").append("<tr><td>"+value+"</td></tr>");
-                });
+                    $.each(layerArray, function(key, value){
+                        $("#export_table").append("<tr><td>"+value+"</td></tr>");
+                    });
 
-                timestamp = Math.floor(Date.now()/1000);
+                    timestamp = Math.floor(Date.now()/1000);
 
-                exportTableToCSV.apply(this, [$('#export_table'), 'GeoJSON_' + timestamp + '.csv']);
+                    exportTableToCSV.apply(this, [$('#export_table'), 'GeoJSON_' + timestamp + '.csv']);
+                };
             }
-            else if(errorCode === 0){
-                alert("You haven't added anything to the map.");  
-            }
-            else if(errorCode === 1){
-                alert("chunk");
-            }
+            else{
+                alert("You haven't added anything to the map."); 
+            };
         });
     </script>
     

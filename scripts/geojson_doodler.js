@@ -30,7 +30,7 @@ function removePropertyFields(x){
 
 
 
-var popupFields = "Properties</br><button class='add_property'>Add property</button><table class='properties_container'><tr class='properties_row'><td><input type='text' class='property' value='layer_name' readonly /></td><td><input type='text' class='value' placeholder='Enter layer name (required)' /></td></tr></table><button class='popup_save'>Save properties</button>";
+var popupFields = "<h3>Properties</h3><button class='add_property'>Add property</button><table class='properties_container'><tr><td><strong>Property</strong></td><td><strong>Value</strong></td></tr><tr class='properties_row'><td><input type='text' class='property' value='layer_name' readonly /></td><td><input type='text' class='value' placeholder='Enter layer name (required)' /></td></tr></table><button class='popup_save'>Save properties</button>";
 
 
 $(document).on("click", ".add_property", function(){
@@ -123,6 +123,12 @@ function save(){
         //GET THE LAYER NAMES OUT OF EACH OBJECT AND PUT LAYER NAMES AND OBJECTS INTO SEPARATE ARRAYS
         $.each(featureGroup._layers, function(key, value){
             geoObject = value.toGeoJSON();
+            
+            if(value.properties === undefined || value.properties.layer_name === ""){
+                errorCode = 1;
+                return false;
+            };
+            
             geoObject.properties = value.properties;
             
             //GETS THE layerName PROPERTY
