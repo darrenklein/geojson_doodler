@@ -5,8 +5,12 @@
 
     <title>GeoJSON Doodler</title>
     
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0' >
+    
     <script src="scripts/jquery-2.1.0.min.js"></script>
     
+    <link rel="stylesheet" href="foundation-5.5.2/css/foundation.min.css" />
+    <link rel="stylesheet" href="foundation-5.5.2/css/normalize.css" />
     <link rel="stylesheet" href="stylesheets/leaflet.css" />
     <link rel="stylesheet" href="stylesheets/leaflet.draw.css" />
     <link rel="stylesheet" href="stylesheets/geojson_doodler.css" />
@@ -15,39 +19,43 @@
 
 <body>
     
-    <div id="title">GeoJSON Doodler</div>
+    <div id="map" class="medium-8 columns"></div>
     
-    <div id="instructions">
-        <ul>
-            <li>Use the tools on the left of the map to draw points, lines, or polygons, then assign them attributes in their pop-up windows.</li>
-            <li>Geometries with the same <strong><i>layer_name</i></strong> attribute will be bundled together into a FeatureCollection on export.</li>
-            <li>Click 'Export' to download a .csv of your GeoJSONs! (export not available in Internet Explorer - please use a cool browser like Chrome, Safari, or Firefox)</li>
-        </ul>
-    </div>
-    
-    <div id="map"></div>
-    
-    <div id="functions">
-        <div id="export_csv_link_container" class="function_container">
-            <a id="export_csv">Export to .csv</a>
+    <div id="dashboard" class="small-4 columns">
+
+        <div id="title" class="small-12 columns">GeoJSON Doodler</div>
+
+        <div id="instructions" class="small-12 columns">
+            <ul>
+                <li>Use the tools on the left of the map to draw points, lines, or polygons, then assign them attributes in their pop-up windows - the <strong><i>layer_name</i></strong> attribute is required.</li>
+                <li>Geometries with the same <strong><i>layer_name</i></strong> attribute will be bundled together into a FeatureCollection on export.</li>
+                <li>Click 'Export' to download your geometries - GeoJSON export will put each layer into a separate file, .csv will bundle the layers together with each in a separate row.</li>
+            </ul>
+        </div>
+
+        <div id="functions" class="small-12 columns">
+            <div id="export_link_container" class="function_container">
+                <a id="export_geojson">Export to GeoJSONs</a>
+            </div>
+            
+            <div id="export_csv_link_container" class="function_container">
+                <a id="export_csv">Export to .csv</a>
+            </div>
+
+            <div id="clear_container" class="function_container">
+                <button id="clear">Clear map</button>
+            </div>
+        </div>
+
+        <div id="footer">
+            <div id="credit">Created by Darren Klein, 2016 - <a href="http://darrenklein.github.io/">darrenklein.github.io</a></div>
+            <div id="githud"><a href="https://github.com/darrenklein/geojson_doodler">github.com/darrenklein/geojson_doodler</a></div>
         </div>
         
-        <div id="export_link_container" class="function_container">
-            <a id="export_geojson">Export to GeoJSONs</a>
-        </div>
+        <div id="export_table_container"></div>
 
-        <div id="clear_container" class="function_container">
-            <button id="clear">Clear map</button>
-        </div>
     </div>
-    
-    <div id="export_table_container"></div>
-    
-    <div id="footer">
-        <div id="credit">Created by Darren Klein, 2016 - <a href="http://darrenklein.github.io/">darrenklein.github.io</a></div>
-        <div id="githud"><a href="https://github.com/darrenklein/geojson_doodler">github.com/darrenklein/geojson_doodler</a></div>
-    </div>
-
+        
     <script src="scripts/leaflet.js"></script>
     <script src="scripts/leaflet.draw.js"></script>    
     <script src="scripts/geojson_doodler.js"></script>

@@ -7,12 +7,7 @@ body{
 }
 
 #map{
-    height: 500px;
-    width: 85%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    height: 100%;
 }
 
 #form_container{
@@ -28,7 +23,7 @@ form{
 #export_csv{
     display: block;
     margin: auto;
-    width: 12%;
+    width: 100%;
     text-align: center;
     background-color: #11CDFF;
     color: #FFFFFF;
@@ -45,9 +40,9 @@ form{
 #export_geojson{
     display: block;
     margin: auto;
-    width: 12%;
+    width: 100%;
     text-align: center;
-    background-color: #11CDFF;
+    background-color: #0DFFA9;
     color: #FFFFFF;
     font-size: 25px;
     letter-spacing: 4px;
@@ -56,14 +51,14 @@ form{
 }
 
 #export_geojson:hover{
-    background-color: #12A9FF;
+    background-color: #0BD48C;
 }
 
 #clear{
     display: block;
     margin: auto;
     border: 0;
-    width: 9%;
+    width: 50%;
     text-align: center;
     background-color: #FF530D;
     color: #FFFFFF;
@@ -75,6 +70,10 @@ form{
 
 #clear:hover{
     background-color: #E82C0C;
+}
+
+#functions{
+    margin-top: 40px;
 }
 
 .function_container{
@@ -91,6 +90,22 @@ form{
     width: 380px;
 }
 
+#dashboard{
+    height: 100%;
+}
+
 #footer{
-    margin-top: 30px;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    font-size: 12px;
+    text-align: right;
+}
+
+.leaflet-popup-content-wrapper{
+    width: 450px;
+}
+
+.leaflet-popup-content{
+    width: 100% !important;
 }
