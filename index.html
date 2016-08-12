@@ -97,8 +97,12 @@
                     });
 
                     timestamp = Math.floor(Date.now()/1000);
-
-                    exportTableToGeoJSON.apply(this, [$('#export_table'), 'GeoJSON_' + timestamp + '.json']);
+                    
+                    
+                    $('#export_table > tbody > tr > td').each(function(){
+                        exportRowToGeoJSON('test', this,'json');
+                        //console.log($(this).html())
+                    });
                 };
             }
             else{
