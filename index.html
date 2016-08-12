@@ -80,6 +80,7 @@
         });
         
         
+        
         $("#export_geojson").on('click', function(){
             
             errorCode = null;
@@ -100,8 +101,10 @@
                     
                     
                     $('#export_table > tbody > tr > td').each(function(){
-                        exportRowToGeoJSON('test', this,'json');
-                        //console.log($(this).html())
+                        geoObject = JSON.parse($(this).html());
+                        layerName = geoObject.name;
+                        console.log(layerName)
+                        //exportRowToGeoJSON($(this).html(), layerName);
                     });
                 };
             }
