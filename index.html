@@ -28,8 +28,12 @@
     <div id="map"></div>
     
     <div id="functions">
+        <div id="export_csv_link_container" class="function_container">
+            <a id="export_csv">Export to .csv</a>
+        </div>
+        
         <div id="export_link_container" class="function_container">
-            <a id="export">Export</a>
+            <a id="export_geojson">Export to GeoJSONs</a>
         </div>
 
         <div id="clear_container" class="function_container">
@@ -49,7 +53,7 @@
     <script src="scripts/geojson_doodler.js"></script>
     
     <script>
-        $("#export").on('click', function(){
+        $("#export_csv").on('click', function(){
             
             errorCode = null;
             
@@ -68,6 +72,33 @@
                     timestamp = Math.floor(Date.now()/1000);
 
                     exportTableToCSV.apply(this, [$('#export_table'), 'GeoJSON_' + timestamp + '.csv']);
+                };
+            }
+            else{
+                alert("You haven't added anything to the map."); 
+            };
+        });
+        
+        
+        $("#export_geojson").on('click', function(){
+            
+            errorCode = null;
+            
+            if(save()){
+                if(errorCode === 1){
+                    alert("The layer name has not been set for one of your objects - please make sure to set and save the layer_name attribute for each of your geometries.");
+                }
+                else{
+                    $('#export_table_container').empty();
+                    $('#export_table_container').append('<table id="export_table" style="display:none"></table>');
+
+                    $.each(layerArray, function(key, value){
+                        $("#export_table").append("<tr><td>"+value+"</td></tr>");
+                    });
+
+                    timestamp = Math.floor(Date.now()/1000);
+
+                    exportTableToGeoJSON.apply(this, [$('#export_table'), 'GeoJSON_' + timestamp + '.json']);
                 };
             }
             else{

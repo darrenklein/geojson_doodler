@@ -25,7 +25,7 @@ form{
     margin: auto;
 }
 
-#export{
+#export_csv{
     display: block;
     margin: auto;
     width: 12%;
@@ -38,7 +38,24 @@ form{
     padding: 10px 0px 10px 0px;
 }
 
-#export:hover{
+#export_csv:hover{
+    background-color: #12A9FF;
+}
+
+#export_geojson{
+    display: block;
+    margin: auto;
+    width: 12%;
+    text-align: center;
+    background-color: #11CDFF;
+    color: #FFFFFF;
+    font-size: 25px;
+    letter-spacing: 4px;
+    cursor: pointer;
+    padding: 10px 0px 10px 0px;
+}
+
+#export_geojson:hover{
     background-color: #12A9FF;
 }
 
