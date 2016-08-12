@@ -103,8 +103,7 @@
                     $('#export_table > tbody > tr > td').each(function(){
                         geoObject = JSON.parse($(this).html());
                         layerName = geoObject.name;
-                        console.log(layerName)
-                        //exportRowToGeoJSON($(this).html(), layerName);
+                        exportRowToGeoJSON($(this).html(), layerName);
                     });
                 };
             }
