@@ -90,9 +90,13 @@ map.on('draw:created', function(e){
             });
         }
         else{
-            //THIS IS THE PROBLEM - RE-BINDING THE BASIC POPUP DROPS THE POPUP SAVE FUNCTIONALITY - BEFORE YOU DO ANYTHING ELSE, REWRITE POPUP SAVE AS A NAMED FUNCTION THAT IS CALLED FROM CLICKING A .popup_save BUTTON RATHER THAN AS A FUNCTION THAT IS EXPLICITLY TIED TO BUTTONS WITH THAT CLASS
             e.layer.bindPopup(popupFields).openPopup();
         };
+        
+        $('.popup_save').click(function(){
+            popupSave(this);
+            e.layer.properties = propertiesObject;
+        });
     });
 
 });
