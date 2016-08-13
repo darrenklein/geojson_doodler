@@ -29,7 +29,7 @@ function removePropertyFields(x){
 
 
 
-var popupFields = "<h5>Properties</h5><button class='add_property popup_control'>Add property</button><table class='properties_container'><tr><td><strong>Property</strong></td><td><strong>Value</strong></td></tr><tr class='properties_row'><td><input type='text' class='property' value='layer_name' readonly /></td><td><input type='text' class='value' placeholder='Required' /></td></tr></table><button class='popup_save popup_control'>Save properties</button>";
+var popupFields = "<h5>Properties</h5><button class='add_property popup_control'>Add property</button><table class='properties_container'><tr><td><strong>Property</strong></td><td><strong>Value</strong></td><td></td></tr><tr class='properties_row'><td><input type='text' class='property' value='layer_name' readonly /></td><td><input type='text' class='value' placeholder='Required' /></td><td></td></tr></table><button class='popup_save popup_control'>Save properties</button>";
 
 
 $(document).on("click", ".add_property", function(){
@@ -74,10 +74,15 @@ map.on('draw:created', function(e){
     
     e.layer.on('click', function(){
         if(e.layer.properties){
-            popupFieldsEdit = "Properties</br><button class='add_property popup_control'>Add property</button><table class='properties_container'>";
+            popupFieldsEdit = "<h5>Properties</h5><button class='add_property popup_control'>Add property</button><table class='properties_container'><tr><td><strong>Property</strong></td><td><strong>Value</strong></td><td></td></tr>";
             
             $.each(e.layer.properties, function(property, value){
-                popupFieldsEdit += "<tr class='properties_row'><td><input type='text' class='property' value='"+property+"' placeholder='Property' /></td><td><input type='text' class='value' value='"+value+"' placeholder='Value' /></td><td><button class='remove'>Remove</button></td></tr>";
+                if(property === "layer_name"){
+                    popupFieldsEdit += "<tr class='properties_row'><td><input type='text' class='property' value='"+property+"' placeholder='Property' /></td><td><input type='text' class='value' value='"+value+"' placeholder='Value' /></td><td></td></tr>";
+                }
+                else{
+                    popupFieldsEdit += "<tr class='properties_row'><td><input type='text' class='property' value='"+property+"' placeholder='Property' /></td><td><input type='text' class='value' value='"+value+"' placeholder='Value' /></td><td><button class='remove'>Remove</button></td></tr>";  
+                };
             });
             
             popupFieldsEdit += "</table><button class='popup_save popup_control'>Save</button>";
