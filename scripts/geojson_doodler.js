@@ -1,4 +1,4 @@
-var map = L.map('map', {scrollWheelZoom: false}).setView([40.709792, -73.991547], 2);
+var map = L.map('map', {}).setView([40.709792, -73.991547], 2);
 
 L.tileLayer('http://{s}.tiles.mapbox.com/v3/skwidbreth.044joc73/{z}/{x}/{y}.png', {
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
@@ -29,7 +29,7 @@ function removePropertyFields(x){
 
 
 
-var popupFields = "<h5>Properties</h5><button class='add_property'>Add property</button><table class='properties_container'><tr><td><strong>Property</strong></td><td><strong>Value</strong></td></tr><tr class='properties_row'><td><input type='text' class='property' value='layer_name' readonly /></td><td><input type='text' class='value' placeholder='Enter layer name (required)' /></td></tr></table><button class='popup_save'>Save properties</button>";
+var popupFields = "<h5>Properties</h5><button class='add_property popup_control'>Add property</button><table class='properties_container'><tr><td><strong>Property</strong></td><td><strong>Value</strong></td></tr><tr class='properties_row'><td><input type='text' class='property' value='layer_name' readonly /></td><td><input type='text' class='value' placeholder='Required' /></td></tr></table><button class='popup_save popup_control'>Save properties</button>";
 
 
 $(document).on("click", ".add_property", function(){
@@ -74,13 +74,13 @@ map.on('draw:created', function(e){
     
     e.layer.on('click', function(){
         if(e.layer.properties){
-            popupFieldsEdit = "Properties</br><button class='add_property'>Add property</button><table class='properties_container'>";
+            popupFieldsEdit = "Properties</br><button class='add_property popup_control'>Add property</button><table class='properties_container'>";
             
             $.each(e.layer.properties, function(property, value){
                 popupFieldsEdit += "<tr class='properties_row'><td><input type='text' class='property' value='"+property+"' placeholder='Property' /></td><td><input type='text' class='value' value='"+value+"' placeholder='Value' /></td><td><button class='remove'>Remove</button></td></tr>";
             });
             
-            popupFieldsEdit += "</table><button class='popup_save'>Save</button>";
+            popupFieldsEdit += "</table><button class='popup_save popup_control'>Save</button>";
             
             e.layer.bindPopup(popupFieldsEdit).openPopup();
             

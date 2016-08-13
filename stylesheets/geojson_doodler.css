@@ -86,10 +86,6 @@ form{
     stroke-opacity:0.7;
 }
 
-.leaflet-popup-content-wrapper{
-    width: 380px;
-}
-
 #dashboard{
     height: 100%;
 }
@@ -103,9 +99,31 @@ form{
 }
 
 .leaflet-popup-content-wrapper{
-    width: 450px;
+    width: 500px;
 }
 
 .leaflet-popup-content{
     width: 100% !important;
+}
+
+.remove{
+    font-size: 11px;
+    padding: 8px 10px 8px 10px;
+    background-color: #FF530D;
+}
+
+.remove:hover{
+    background-color: #E82C0C;
+}
+
+.popup_control{
+    padding: 10px 12px 10px 12px;
+}
+
+.properties_container{
+    margin: 5px 0px 5px 0px;
+}
+
+input[type="text"]{
+    margin-bottom: 0;
 }
