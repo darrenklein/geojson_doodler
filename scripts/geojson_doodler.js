@@ -219,7 +219,7 @@ function exportTableToCSV($table, filename){
 function exportRowToGeoJSON(storageObj, fileName){
     dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(storageObj);
     link = document.createElement('a');
-    link = document.body.appendChild(link)
+    link = document.body.appendChild(link);
     link.setAttribute("href", dataStr);
     link.setAttribute("download", fileName + ".json");
     link.click();
